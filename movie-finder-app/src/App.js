@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./components/MovieList";
+import CardMovie from "./components/Card";
 import MovieListHeading from "./components/MovieListHeading";
 import SearchBox from "./components/SearchBox";
 import AddFavourite from "./components/AddToFavourite";
@@ -51,6 +51,7 @@ const App = () => {
     saveToLocalStorage(newFavouriteList);
     console.log(newFavouriteList);
   };
+
   const removeFavouriteMovie = (movie) => {
     const newFavouriteList = favourites.filter(
       (favourite) => favourite.imdbID !== movie.imdbID
@@ -61,19 +62,21 @@ const App = () => {
     console.log(newFavouriteList);
   };
   return (
-    <div className="container-fluid movie-app">
-      <div className="row d-flex align-items-center mt-4 mb-4">
-        <MovieListHeading heading="Movies" />
+    <div className="container">
+      <div className="heading">
+        <MovieListHeading heading="Find your next Movie ..." />
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="row">
-        <MovieList
+      <div className="container">
+        {/* <MovieList
           movies={movies}
           favouriteComponent={AddFavourite}
           handleFavouritesClick={addFavouriteMovie}
-        />
+        /> */}
+
+        <CardMovie movies={movies} handleFavouritesClick={addFavouriteMovie} />
       </div>
-      <div className="row d-flex align-items-center mt-4 mb-4">
+      {/* <div className="row d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="Favourites" />
       </div>
       <div className="row">
@@ -81,6 +84,15 @@ const App = () => {
           movies={favourites}
           handleFavouritesClick={removeFavouriteMovie}
           favouriteComponent={RemoveFavourites}
+        />
+      </div> */}
+      <div className="heading">
+        <MovieListHeading heading="So far your Favourites ..." />
+      </div>
+      <div className="container">
+        <CardMovie
+          movies={favourites}
+          handleFavouritesClick={removeFavouriteMovie}
         />
       </div>
     </div>
